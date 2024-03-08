@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+
+  display: flex;
+  justify-content: center;
 }
 
 .App-logo {
@@ -28,15 +31,19 @@
   color: #61dafb;
 }
 
-.flex-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  width: 500px;
+.memory-board {
+  width: 40%;
 }
 
-.flex-item {
-  align-self: center;
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.image {
+  justify-self: center;
+  width: 100%;
+  height: auto;
 }
 
 @keyframes App-logo-spin {
