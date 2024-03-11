@@ -57,25 +57,40 @@ function App() {
 
   function turnCard(cardIndex) {
     const newCardsDisplay = Array.from(cardsDisplay);
-
-    if (cardsDisplay[cardIndex] === backCard && currentCards.length <= 1) {
-      newCardsDisplay[cardIndex] = cards[cardIndex];
-      setCurrentCards(prevCurrentCards => [...prevCurrentCards, cards[cardIndex]]);
+    if (currentCards.length <= 1) {
+      if (cardsDisplay[cardIndex] === backCard) {
+        newCardsDisplay[cardIndex] = cards[cardIndex];
+        setCurrentCards(prevCurrentCards => [...prevCurrentCards, cards[cardIndex]]);
+      } else {
+        newCardsDisplay[cardIndex] = backCard;
+        setCurrentCards(prevCurrentCards => prevCurrentCards.filter(card => card !== cards[cardIndex]));
+      }
     } else {
-      newCardsDisplay[cardIndex] = backCard;
-      setCurrentCards(prevCurrentCards => prevCurrentCards.filter(card => card !== cards[cardIndex]));
+      checkCards();
     }
     setCardsDisplay(newCardsDisplay);
   }
 
   function checkCards() {
     if (currentCards[0] === currentCards[1]) {
+      setTimeout(() => {
       const currentCardPath = currentCards[0];
-      const newCardsDisplay = cardsDisplay.map((card, index) => 
+      const newCardsDisplay = cardsDisplay.map((card) => 
         card === currentCardPath ? null : card
       );
       setCurrentCards([]);
       setCardsDisplay(newCardsDisplay);
+      }, 500);
+    } else {
+      setTimeout(() => {
+        const newCardsDisplay = Array.from(cardsDisplay);
+        const indexInDisplay1 = cardsDisplay.findIndex(card => card === currentCards[0]);
+        const indexInDisplay2 = cardsDisplay.findIndex(card => card === currentCards[1]);
+        newCardsDisplay[indexInDisplay1] = backCard;
+        newCardsDisplay[indexInDisplay2] = backCard;
+        setCurrentCards([]);
+        setCardsDisplay(newCardsDisplay);
+      }, 500);
     }
   }
 
