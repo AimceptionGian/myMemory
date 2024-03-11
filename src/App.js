@@ -90,7 +90,7 @@ function App() {
         newCardsDisplay[indexInDisplay2] = backCard;
         setCurrentCards([]);
         setCardsDisplay(newCardsDisplay);
-      }, 500);
+      }, 1000);
     }
   }
 
@@ -101,8 +101,10 @@ function App() {
           { cardsDisplay.map((card, index) => {
               if (card) {
                 return (
-                <button onClick={() => turnCard(index)}>{card ? <img src={card} alt="Card" className='image' /> : null}</button>
+                <button onClick={() => turnCard(index)}><img src={card} alt="Card" className='image' /></button>
                 );
+              } else {
+                return(<div/>);
               }
             })
           }
